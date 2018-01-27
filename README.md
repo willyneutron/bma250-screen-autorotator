@@ -1,4 +1,4 @@
-#Screen autorotator based on BMA250 Bosch accelerometer
+# Screen autorotator based on BMA250 Bosch accelerometer
 
 This script is designed to poll BMA250 accelerometer for position info.
 Depending of this data, screen will be rotated using xrandr.
