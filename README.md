@@ -7,7 +7,7 @@ I hope this application will be useful to provide a more complete experience in 
 tablets based in Intel microprocessors when running Linux.
 
 This program was developed for and tested in a Chuwi Hi 10 Pro, running Lubuntu 17.10 with
-4.13.0-25 kernel installed. A guide to run Linux in this device can be found [here](https://github.com/willyneutron/lubuntu_in_chuwi_Hi10Pro)
+4.13.0-25 kernel installed. A guide to run Linux in this device can be found [here](https://github.com/willyneutron/lubuntu_in_chuwi_Hi10Pro).
 
 ## Compilation and installation
 First of all dependencies must be installed:
@@ -66,7 +66,7 @@ Xft.dpi: 140
 ```
 
 ## References
-I have written a complete guide for running Lubuntu in the Chuwi Hi10 Pro, it can be found [here](https://github.com/willyneutron/lubuntu_in_chuwi_Hi10Pro)
+I have written a complete guide for running Lubuntu in the Chuwi Hi10 Pro, it can be found [here](https://github.com/willyneutron/lubuntu_in_chuwi_Hi10Pro).
 
 If you want to use BMA250, this guys have very good examples and more information:
 
