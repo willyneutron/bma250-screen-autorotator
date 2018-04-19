@@ -29,6 +29,10 @@
 #include "i2c_bma250.h"
 #include "xrandr_rotate.h"
 
+#ifdef XDEVICE
+    #include "xinput_rotate.h"
+#endif
+
 // Search for BMA250 in this I2C bus. Check i2cdetect -y -r <device>
 #ifndef BMA250_I2C_BUS
 #define BMA250_I2C_BUS 2
@@ -139,7 +143,11 @@ int main(int argc, char *argv[]) {
                 printf("Rotating to %d\n", new_rotation);
             #endif
 
-            rotate(&xrandrData, new_rotation);
+            #ifdef XDEVICE
+                xinputRotate(xrandrData.dpy, new_rotation);
+            #endif
+
+            xrandrRotate(&xrandrData, new_rotation);
             current_rotation = new_rotation;
         }
     }

@@ -1,7 +1,7 @@
 /*
      Screen autorrotator based  on BMA250 Bosch accelerometer
 
-     This module is in charge of using xrandr functions to rotate screen when needed.
+     This module is in charge of rotating a pointing device when needed.
 
      Copyright (c) 2018 Guillermo Climent, https://github.com/willyneutron
 
@@ -19,43 +19,23 @@
      along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef XRANDR_ROTATE_H
-#define XRANDR_ROTATE_H
+#ifndef XINPUT_ROTATE_H
+#define XINPUT_ROTATE_H
 
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
-#include <string.h>
 
-#include <X11/extensions/Xrandr.h>
-
-// Struct to store all data needed to perform a screen rotation
-typedef struct _xrandrData{
-    int screen;
-    Window root;
-    Display *dpy;
-    XRRScreenConfiguration *sc;
-} XrandrData;
+#include <X11/extensions/XInput2.h>
 
 /**
- * @brief initXrandrData
- *
- * Inits Xrandr structures needed for screen rotation.
- *
- * @param data  Structure where store information.
- * @return      1 if no error encountered, 0 otherwhise.
- */
-int initXrandrData(XrandrData *data);
-
-/**
- * @brief xrandrRotate
+ * @brief xinput_rotate
  *
  * Rotates the screen.
  *
- * @param data      Initialized xrandr data structure.
+ * @param dpy       Xrandr initialized display.
  * @param rotation  1,2,3 or 4. Each of these values represents a possible orientation
  *                  of the screen.
  */
-void xrandrRotate (XrandrData *data, int rotation);
+void xinputRotate (Display *dpy, int rotation);
 
 #endif

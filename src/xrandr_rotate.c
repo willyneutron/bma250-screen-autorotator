@@ -43,7 +43,7 @@ int initXrandrData(XrandrData *data){
 }
 
 
-void rotate (XrandrData *data, int rotation)
+void xrandrRotate (XrandrData *data, int rotation)
 {
     Status s;
     time_t rawtime;

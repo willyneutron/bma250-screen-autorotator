@@ -3,6 +3,8 @@
 This script is designed to poll BMA250 accelerometer for position info.
 Depending of this data, screen will be rotated using xrandr.
 
+It also supports rotating a pointing device, like for example, a touchscreen.
+
 I hope this application will be useful to provide a more complete experience in some chinese
 tablets based in Intel microprocessors when running Linux.
 
@@ -12,7 +14,7 @@ This program was developed for and tested in a Chuwi Hi 10 Pro, running Lubuntu 
 ## Compilation and installation
 First of all dependencies must be installed:
 ```bash
-sudo apt-get install libxrandr-dev i2c-tools
+sudo apt-get install libxrandr-dev libxi-dev i2c-tools
 ```
  
 Then, it can be compiled and installed as normal:
@@ -27,11 +29,10 @@ Executing the aplication will need root permissions, because it needs to read fr
 ## Special configurations
 In the case of Chiwi Hi10 Pro, BMA250 accelerometer is located in the bus /dev/i2c-2 listening in
 address 0x18. In order to make easier the use of this software in other devices, you can configure
-some parameters by defining some macros at compilation time:
+some parameters by defining macros at compilation time:
 
 ```bash
     ./configure CFLAGS='-D<macro>=<value>'
-
 ```
 
  - ```BMA250_I2C_BUS```: This macro defines which /dev/i2c-%d file will be open. Default value es 2.
@@ -39,10 +40,20 @@ some parameters by defining some macros at compilation time:
 By default, 0x18 address is set.
  - ```POLLING_USECS```: Waiting time (in usecs) between accelerometer data reads. Default value is
 set to 500 * 1000.
- - ```DEBUG```: You can compile with this flag and get some useful debug information in stdout.
+ - ```XDEVICE```: This is the ID of the pointing device to rotate. It can be obtained from xinput by executing ```xinput list```. By default
+this macro is not defined, if so, no pointing device will be rotated.
+
+For example, in the case of the Chuwi Hi10 Pro, this macro needs to be set to ```11``` according to ```xinput``` output:
+![Xinput list output][xinput]
+
+```bash
+./configure CFLAGS="-DXDEVICE=11"
+```
+
+ - ```DEBUG```: Defining this macro produces some useful debug information in stdout.
 
 ## Installation in LXDE (Lubuntu)
-In order to lauch autorrotator on startup, it can be included in ```/etc/lightdm/lightdm.conf.d/80-display-setup.conf```:
+In order to launch autorrotator on startup, it can be included in ```/etc/lightdm/lightdm.conf.d/80-display-setup.conf```:
 
 ```
 [SeatDefaults]
@@ -68,6 +79,11 @@ Xft.dpi: 140
 ## References
 I have written a complete guide for running Lubuntu in the Chuwi Hi10 Pro, it can be found [here](https://github.com/willyneutron/lubuntu_in_chuwi_Hi10Pro).
 
+If you are interested in more info about running Linux (Arch Linux) in a Chiwi Hi10 Pro, you can get more information on
+Daniel Otero's repository:
+
+https://github.com/danielotero/linux-on-hi10
+
 If you want to use BMA250, this guys have very good examples and more information:
 
 https://github.com/ControlEverythingCommunity/BMA250
@@ -79,11 +95,6 @@ https://askubuntu.com/questions/408302/rotated-monitor-login-screen-needs-rotati
 I also have to thank Mitch Lindgren by his post on how to set LXDE DPI settings:
 
 http://blog.mlindgren.ca/entry/2015/02/21/configuring-dpi-in-lubuntu-slash-lxde/
-
-If you are interested in more info about running Linux (Arch Linux) in a Chiwi Hi10 Pro, you can get more information on
-Daniel Otero's repository:
-
-https://github.com/danielotero/linux-on-hi10
 
 ## About
 
@@ -101,3 +112,5 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+[xinput]: /images/xinput.png
